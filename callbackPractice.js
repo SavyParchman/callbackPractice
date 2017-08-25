@@ -24,6 +24,9 @@ and what you should write is the sayHi function that makes the code above work,
 
   // Code Here
 
+  function first(names, cb) {
+    cb(names[0]);
+  }
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -37,7 +40,9 @@ first(names, function(firstName){
 
   //Code Here
 
-
+function last(names, cb) {
+  cb(names[names.length - 1]);
+}
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -50,8 +55,10 @@ last(names, function(lastName){
 
   //Code Here
 
-
-
+  function multiply(x, y, cb) {
+    cb(x * y);
+  }
+  
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
 })
@@ -64,8 +71,16 @@ multiply(4, 3, function(answer){
 
   //Code Here 
 
-
-
+function contains(names, element, cb) {
+  for (i = 0; i < names.length; i++) {
+    if (element === names[i]) {
+      return cb(true);
+    }    
+  else { 
+    return cb(false);
+  }
+}
+}
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -82,17 +97,28 @@ contains(names, 'Colt', function(result){
 
   //Code Here
 
-
+  function uniq(names, cb) {
+    var filtered = names.filter(function(name, index) {
+    return names.indexOf(name) === index;
+    });
+    cb(filtered);
+  }
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
 });
 
 
-// 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
+// 6. Write a function called each that takes in an array of names. For each name in the array, 
+// invoke the callback and pass in the name and the name's index as arguments.
 
     //Code Here 
 
+function each(names, cb) {
+  for (i = 0; i < names.length; i++) {
+    cb(names[i], i);
+  }
+}
 
 
 each(names, function(item, indice){
@@ -105,7 +131,13 @@ each(names, function(item, indice){
 // When the correct user object is found, invoke the callback with the user object as an argument.
 
 // Code here
-
+function getUserById(arr, idsearch, cb) {
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i].id === idsearch) {
+      cb(arr[i]);
+    }
+  }
+}
 
 
 var users = [
